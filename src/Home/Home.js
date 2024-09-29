@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import './Home.css'
+import LogoutPrompt from '../components/Logout';
+import { useDispatch } from 'react-redux';
+import { removeToken } from '../redux/reducer';
 const Home = () => {
   const [isCollapsed, setIsCollapsed] = useState(false); 
+  const [logout, setlogout] = useState(false)
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
-
+  
+const userLogout = () =>{
+  
+  setlogout(true)
+}
   return (
     <div>
-<div class="container">
-    <div className={` ${isCollapsed ? 'collapsed' : ''}`}> 
-    <div className={`sidebar`}>
+<div class="container"> 
+    <div className={`sidebar  ${isCollapsed ? 'collapsed' : ''}`}>
       {/* Logo Section */}
-      <div className="logo"> 
-        {!isCollapsed&&<><span className="sidebar_title">Securitech</span><br/>
-          <span className="subtitle">Uncompromising security.</span></>}
-      </div>
+     
 
       {/* Navigation Links */}
       <div className="nav-container">
+      <div className="logo_sidebar"> 
+        {!isCollapsed&&<><span className="sidebar_title">Securitech</span><br/>
+          <span className="subtitle">Uncompromising security.</span></>}
+      </div>
       <div>
         <nav className="nav-links">
-          <Link to="/dashboard" className={`nav-link ${isCollapsed&&"hidden"}`}>
+          <Link to="/" className={`nav-link ${isCollapsed&&"hidden"}`}>
             <span className="icon">🏠</span>
             {!isCollapsed&&<span className={`text `}>Dashboard</span>}
           </Link>
@@ -45,15 +53,17 @@ const Home = () => {
         {isCollapsed ? '▶' : '◀'}
       </button>
     </div>
+    <div className="logout_sidebar">
+      <button className="button" onClick={userLogout}> {!isCollapsed?"Logout":"L"}</button>
     </div>
-    </div>
+    </div> 
     <div class="right-div"> 
     <Outlet />
     </div>
    
   </div>
   
-
+{logout&&<LogoutPrompt handleLogout={setlogout} />}
 </div>
     
   );

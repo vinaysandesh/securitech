@@ -16,7 +16,7 @@ export const counterSlice = createSlice({
         state.jwt = action.payload
       },
       removeToken: (state) => {
-        state.jwt = ""
+        state.jwt = null
       },
       incrementByAmount: (state, action) => {
         state.value += action.payload

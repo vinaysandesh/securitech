@@ -5,6 +5,7 @@
     background-color: #360062;
     height: 100vh; 
     background-image: url('./../images//bg.png');
+    justify-content: space-between;
     
   }
   
@@ -61,13 +62,13 @@
     left: 15px;
   }
   
-  .logo { 
+  .logo_sidebar { 
     text-align: left;
     padding:20px;
     height:60px;
 
   }
-.logo h2 {
+.logo_sidebar h2 {
     margin: 0;
     font-size: 24px;
   }
@@ -108,4 +109,12 @@
     font-size:28px;
     margin:0px;
     font-weight: bold;
+  }
+
+  .logout_sidebar{   
+    display:flex; 
+    height:80px;
+    align-items: center;
+    justify-content: center;
+   
   }
