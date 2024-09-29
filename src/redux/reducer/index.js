@@ -4,7 +4,7 @@ export const counterSlice = createSlice({
     name: 'counter',
     initialState: {
       value: 0,
-      jwt:"This is a jwt",
+      jwt:null,
     },
     reducers: {
       addJwt: (state, action) => {
@@ -21,6 +21,7 @@ export const counterSlice = createSlice({
       incrementByAmount: (state, action) => {
         state.value += action.payload
       },
+      
     },
   })
   

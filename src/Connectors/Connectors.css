@@ -1,0 +1,54 @@
+.dashboard_top {
+    display: flex;  /* Use flexbox to align items in a row */
+    flex-direction: row   ;
+    justify-content: space-between; /* Space between the elements */
+    align-items: center; /* Vertically align the elements */
+  }
+  
+  .page_name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .name_span {
+    display: flex;
+    font-size: 18px;
+    align-items: center;
+  }
+  #profile_name{
+    margin:8px
+  }
+  .dashboard_down {
+    flex:auto; /* larger width */ 
+    padding: 20px;
+     
+  }
+  .profile_pic{
+    height:48px;
+     border-radius: 48px;
+     width:48px;
+     object-fit: cover;
+      overflow: hidden;
+  }
+  
+  .charts_items{
+    height:300px;
+    width:300px;
+    background-color: red;
+    margin:20px;
+    margin-left:20px;
+    margin-right:20px;
+    border-radius:10px;
+    box-shadow: 5px 10px #888888;;
+  }
+  .charts{
+    display: flex;
+    flex:1;
+    flex-direction: row;
+    margin:20px;
+  
+  }
+  
+  #logs_latest{
+    
+  }
