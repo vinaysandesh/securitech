@@ -6,9 +6,13 @@ import { useDispatch } from 'react-redux';
 import { removeToken } from '../redux/reducer';
 const Home = () => {
   const [isCollapsed, setIsCollapsed] = useState(false); 
+  const [isCollapsed2, setIsCollapsed2] = useState(false); 
   const [logout, setlogout] = useState(false)
   const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
+    setIsCollapsed2(!isCollapsed2)
+    setTimeout(()=>{
+      setIsCollapsed(!isCollapsed);
+    },500)
   };
   
 const userLogout = () =>{
@@ -24,10 +28,15 @@ const userLogout = () =>{
 
       {/* Navigation Links */}
       <div className="nav-container">
-      <div className="logo_sidebar"> 
+     <div>
+     <div className="logo_sidebar"> 
         {!isCollapsed&&<><span className="sidebar_title">Securitech</span><br/>
           <span className="subtitle">Uncompromising security.</span></>}
       </div>
+      <button className={`toggle-btn `} onClick={toggleSidebar}>
+        {isCollapsed ? '▶' : '◀'}
+      </button>
+     </div>
       <div>
         <nav className="nav-links">
           <Link to="/" className={`nav-link ${isCollapsed&&"hidden"}`}>
@@ -49,9 +58,7 @@ const userLogout = () =>{
           </Link>
         </nav>
       </div>
-      <button className={`toggle-btn ${isCollapsed&&"toggle-btn-collapsed"}`} onClick={toggleSidebar}>
-        {isCollapsed ? '▶' : '◀'}
-      </button>
+      
     </div>
     <div className="logout_sidebar">
       <button className="button" onClick={userLogout}> {!isCollapsed?"Logout":"L"}</button>

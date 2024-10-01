@@ -19,8 +19,7 @@
     margin:8px
   }
   .dashboard_down {
-    flex:auto; /* larger width */ 
-    padding: 20px;
+    flex:auto; /* larger width */  
      
   }
   .profile_pic{
@@ -49,6 +48,54 @@
   
   }
   
-  #logs_latest{
-    
+  .tool-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin:8px;
+     
+  }
+  
+  .logo {
+    width: 60px;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  h2 span {
+    color: #ffd700; /* Gold color for styling */
+  }
+  
+  .scan-btn {
+    background-color: #ffd700;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .scan-btn:hover {
+    background-color: #e0b800;
+  }
+  
+  input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+  }
+  .desc_connectors{
+    flex-direction: column;
+    margin-left:20px;
   }

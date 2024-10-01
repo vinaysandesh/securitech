@@ -20,7 +20,7 @@
 }
 .dashboard_down {
   flex:auto; /* larger width */ 
-  padding: 20px;
+ 
    
 }
 .profile_pic{
@@ -57,11 +57,8 @@
 
 }
 
-#logs_latest{ 
-  margin-left:20px;
-  margin-right:20px;
-  height:400px;
-  border-radius:10px;
+#logs_latest{  
+  height:400px; 
 }
 table{
   height:300px;

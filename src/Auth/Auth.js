@@ -36,7 +36,7 @@ const LoginForm = ({ onSwitch }) => {
   
   return (
     <div>
-      <h2>Login</h2>
+      <h2 style={{textAlign:"center"}}>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group"> 
           <input
@@ -58,13 +58,16 @@ const LoginForm = ({ onSwitch }) => {
              className='input'
           />
         </div>
+        <div style={{display:"flex", justifyContent:"center"}}>
         <button className='button' type="submit">Login</button>
+        </div>
       </form>
-      <p>
+      <p style={{textAlign:'center'}}>
         Don't have an account?{' '}
-        <button onClick={onSwitch} className="switch-btn">
+        {/* <button onClick={onSwitch} className="switch-btn">
           Register here
-        </button>
+        </button> */}
+        <span className="switch-btn" onClick={onSwitch}>Register Here!</span>
       </p>
     </div>
   );
@@ -109,7 +112,7 @@ const RegisterForm = ({ onSwitch }) => {
 
   return (
     <div>
-      <h2>Register</h2>
+      <h2 style={{textAlign:"center"}}>Register</h2>
       <form onSubmit={handleSubmit}>
       <div className="form-group"> 
           <input
@@ -151,18 +154,15 @@ const RegisterForm = ({ onSwitch }) => {
             className='input'
           />
         </div>
+        <div style={{display:"flex", justifyContent:"center"}}>
         <button className="button" type="submit">Register</button>
+        </div>
+        
       </form>
-      <p>
+      <p style={{textAlign:'center'}}>
         Already have an account?{' '}
-        <button onClick={onSwitch} className="switch-btn">
-          Login here
-        </button>
-        <button onClick={()=>{
-            dispatch(addJwt("Hello Worlds"))
-        }} className="switch-btn">
-          LOGOUT
-        </button>
+      
+        <span className="switch-btn" onClick={onSwitch}> Login here!</span>
       </p>
     </div>
   );

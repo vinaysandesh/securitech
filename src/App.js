@@ -27,20 +27,14 @@ export default function App() {
         {
           path:"connectors",
           element: <Connectors/>
-        }
+        } 
       ],
     },
   ]);
   const router_auth = createBrowserRouter([
     {
       path: "/",
-      element: <AuthPage />,
-      // children: [
-      //   {
-      //     path: "dashboard",
-      //     element: <Dashboard />,
-      //   } 
-      // ],
+      element: <AuthPage />, 
     },
   ]);
   console.log(jwt)

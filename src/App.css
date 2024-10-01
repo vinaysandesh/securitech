@@ -50,8 +50,7 @@
 }
 
 .right-div {
-  flex:auto; /* larger width */ 
-  padding: 20px;
+  flex:auto; /* larger width */  
 }
 /* src/components/Sidebar.css */
 

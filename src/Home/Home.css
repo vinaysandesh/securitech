@@ -6,6 +6,7 @@
     height: 100vh; 
     background-image: url('./../images//bg.png');
     justify-content: space-between;
+    transition: width 1s;
     
   }
   
@@ -35,6 +36,7 @@
   
   .sidebar.collapsed .nav-link .text {
     display: none;
+
   }
   
   .sidebar.collapsed .icon {
@@ -51,6 +53,7 @@
     border: none;
     padding: 10px;
     cursor: pointer; 
+     
   }
   
   .sidebar.collapsed + .toggle-btn {

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "../Dashboard/Dashboard.css"
+import "../Connectors/Connectors.css"
+import nmapLogo from '../images/nmap.jpg'
+import snortLogo from '../images/snort.jpg'
 const Connectors = () =>{
   const [name, setName ] = useState("Vinay Sounderraj")
   return (
@@ -14,17 +17,28 @@ const Connectors = () =>{
   </div>
 </div>
       <div className="dashboard_down">
-         <div className="charts">
-           <div className="charts_items">
-             
-           </div>
-           <div className="charts_items">
+      <div className="tool-card">
+        <div className="connectors_logo">
+        <img src={nmapLogo} alt="Nmap Logo" className="logo" />
+        </div>
+        <div className="desc_connectors">
+        <h2>NM<span>A</span>P</h2>
+        <p>Nmap is a tool to perform network vulnerability scans. To get started just add the host you want to scan and hit scan</p>
+        <input type="text" placeholder="Enter host..." />
+        <button className="scan-btn">Scan</button>
+        </div>
+      </div>
 
-           </div>
-         </div>
-         <div id="logs_latest">
-          Nothing
-         </div>
+      <div className="tool-card">
+      <div className="connectors_logo">
+      <img src={snortLogo} alt="Snort Logo" className="logo" />
+        </div>
+        <div className="desc_connectors">
+        <h2>SNO<span>R</span>T</h2>
+        <p>Snort is a Network-based intrusion detection system. Use the button below to start the scanning on the host.</p>
+        <button className="scan-btn">Start</button>
+        </div>
+      </div>
       </div> 
     </div>
   )

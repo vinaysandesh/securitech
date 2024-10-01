@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "../Dashboard/Dashboard.css"
 import axiosApi from "../utility/axios";
-import { get_user_details } from "../const/api";
+import { get_grouped_logs, get_logs, get_user_details } from "../const/api";
+import ChartComponent from "../components/ChartComponent";
 const Dashboard = () =>{
   const [name, setName ] = useState("Vinay Sounderraj")
+  const [logs, setLogs ] = useState([])
+  const [loading, setLoading] = useState(true)
+  
   useEffect(()=>{
     axiosApi(get_user_details,"POST",null,(data)=>{
        console.log(data.data.user[0].username  ) 
        setName(data.data.user[0].username)
+        
     })
+    axiosApi(get_logs,"POST",null,(data)=>{
+      console.log(data)
+      setLogs(data.data)
+      
+    })
+   
   },[])
   const tableStyle = {
     width: '100%',
@@ -19,7 +30,7 @@ const Dashboard = () =>{
 
   const thStyle = {
     padding: '12px 15px',
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#b86ef5',
     color: 'white',
     textAlign: 'left',
     fontWeight: 'bold',
@@ -34,6 +45,7 @@ const Dashboard = () =>{
 
   const tbodyRowStyle = {
     backgroundColor: '#f9f9f9',
+    height:"120px"
   };
 
   const alertIconStyle = {
@@ -41,11 +53,46 @@ const Dashboard = () =>{
   };
   const tableContainerStyle = {
     height: '350px', // Fixed height for the table
+     
     overflowY: 'auto', // Enable vertical scrolling
     border: '1px solid black',
   };
+  const trStyle = {
+    height:"50px",
+
+  }
+  const RenderPriority = (props)=>{
+    var style = {...tdStyle,
+      borderRadius:"8px",
+      color:"white",
+      fontWeight:'bold'
+    }
+    if(props.val == "High"){
+      style = { ...style,
+        backgroundColor:'#FF0000',
+
+      };
+    }else if(props.val=="Medium"){
+   style = { ...style,
+        backgroundColor:'#FFFF00',
+        
+      };
+    }else if(props.val=="Low"){
+      style = { ...style,
+        backgroundColor:'#008000',
+        
+      };
+    }else if(props.val=="Info"){
+      style = { ...style,
+        backgroundColor:'#808080',
+        
+      };
+    }
+    return <td style={{...tdStyle}}><span style={style}>{props.val}</span></td>
+
+  } 
   return (
-    <div> 
+    <div style={{height:"100%"}}> 
      <div className="dashboard_top">
   <div className="page_name">
     <span>Dashboard</span>
@@ -57,11 +104,11 @@ const Dashboard = () =>{
 </div>
       <div className="dashboard_down">
          <div className="charts">
-           <div className="charts_items_bar">
-             
+           <div className="charts_items_bar"> 
+             <ChartComponent/>
            </div>
            <div className="charts_items">
-
+              
            </div>
            <div className="charts_items">
 
@@ -70,33 +117,35 @@ const Dashboard = () =>{
          <div id="logs_latest" style={tableContainerStyle}>
          <table style={tableStyle}>
         <thead>
-          <tr>
+          <tr style={trStyle}>
             <th style={thStyle}>ID</th>
-            <th style={thStyle}>Name</th>
-            <th style={thStyle}>Email</th>
-            <th style={thStyle}>Role</th>
-            <th style={thStyle}>Alert Description</th>
+            <th style={{...thStyle,width:"100px"}}>Name</th>
+            <th style={thStyle}>Description</th>
+            <th style={thStyle}>Assigned to</th>
+            <th style={thStyle}>Status</th>
+            <th style={thStyle}>Host</th>
+            <th style={thStyle}>Tool</th>
+            <th style={thStyle}>Priority</th>
           </tr>
         </thead>
         <tbody>
-          <tr style={tbodyRowStyle}>
-            <td style={tdStyle}>1</td>
-            <td style={tdStyle}>John Doe</td>
-            <td style={tdStyle}>john@example.com</td>
-            <td style={tdStyle}>Manager</td>
-            <td style={tdStyle}>
-              <span style={alertIconStyle}>⚠️</span> Unauthorized access attempt detected at 10:30 AM
-            </td>
-          </tr>
-          <tr>
-            <td style={tdStyle}>2</td>
-            <td style={tdStyle}>Jane Smith</td>
-            <td style={tdStyle}>jane@example.com</td>
-            <td style={tdStyle}>Admin</td>
-            <td style={tdStyle}>
-              <span style={alertIconStyle}>⚠️</span> Failed login attempt from unknown IP
-            </td>
-          </tr>
+          {loading &&!logs?(<span>LOADING CONTENT</span>):(
+            <>
+            {logs.map((source, index)=>{
+              return <tr style={tbodyRowStyle}>
+              <td style={tdStyle}>{index+1}</td>
+              <td style={tdStyle}><a href={source.issue_url} target="_blank">{source.issue_name}</a></td>
+              <td style={tdStyle}>{source.issue_description}</td>
+              <td style={tdStyle}>{source.assigned_to}</td>
+              <td style={tdStyle}>{source.status}</td>
+              <td style={tdStyle}>{source.host}</td>
+              <td style={tdStyle}>{source.tool}</td> 
+              <RenderPriority val={source.issue_priority}/>
+            </tr>
+            })}
+            </>
+          )}
+          
         </tbody>
       </table>
          </div>
