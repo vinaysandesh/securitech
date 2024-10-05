@@ -3,8 +3,22 @@ import "../Dashboard/Dashboard.css"
 import "../Connectors/Connectors.css"
 import nmapLogo from '../images/nmap.jpg'
 import snortLogo from '../images/snort.jpg'
+import axiosApi from "../utility/axios";
+import { run_nmap } from "../const/api";
 const Connectors = () =>{
   const [name, setName ] = useState("Vinay Sounderraj")
+  const [target, setTarget ] = useState(null)
+  const runNmap = ()=>{
+    console.log("TARGET = ",target)
+   if(target!=null){
+    var data = {target:target}
+    axiosApi(run_nmap,"POST",data,(data)=>{
+      console.log(data  ) 
+      
+      
+   }) 
+   }
+  }
   return (
     <div> 
      <div className="dashboard_top">
@@ -24,8 +38,8 @@ const Connectors = () =>{
         <div className="desc_connectors">
         <h2>NM<span>A</span>P</h2>
         <p>Nmap is a tool to perform network vulnerability scans. To get started just add the host you want to scan and hit scan</p>
-        <input type="text" placeholder="Enter host..." />
-        <button className="scan-btn">Scan</button>
+        <input type="text" placeholder="Enter host..." onChange={e => setTarget(e.target.value)}/>
+        <button className="scan-btn" onClick={runNmap}>Scan</button>
         </div>
       </div>
 

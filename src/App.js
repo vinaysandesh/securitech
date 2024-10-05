@@ -7,6 +7,7 @@ import Home from "./Home/Home";
 import { useDispatch, useSelector } from "react-redux";
 import AuthPage from "./Auth/Auth"; 
 import Connectors from "./Connectors/Connectors";
+import { CNavGroup, CNavItem, CNavTitle, CSidebar, CSidebarBrand, CSidebarHeader, CSidebarNav, CSidebarToggler } from "@coreui/react";
  
 const Profile = () => <h1>Profile</h1>;
 const Settings = () => <h1>Settings</h1>;
@@ -40,5 +41,6 @@ export default function App() {
   console.log(jwt)
   return (
     <RouterProvider router={jwt?router:router_auth}/> 
+    
   );
 }
