@@ -8,17 +8,31 @@ import { useDispatch, useSelector } from "react-redux";
 import AuthPage from "./Auth/Auth"; 
 import Connectors from "./Connectors/Connectors";
 import { CNavGroup, CNavItem, CNavTitle, CSidebar, CSidebarBrand, CSidebarHeader, CSidebarNav, CSidebarToggler } from "@coreui/react";
- 
-const Profile = () => <h1>Profile</h1>;
-const Settings = () => <h1>Settings</h1>;
+import Logs from "./Logs/Logs";
+import Playbooks from "./Playbooks/Playbooks";
+import Profile from "./Profile/Profile"; 
 
-export default function App() {
+
+export default function App() { 
   const jwt = useSelector((state) => state.jwt) 
-
+  const ErrorComp = ()=>{
+    return <div style={{display:'flex',flex:1, alignItems:'center',justifyContent:'center',flexDirection:'row',height:'100vh' }}>
+      <div style={{display:'flex', flexDirection:'row', alignItems:'center',justifyContent:'center' }}>
+      <div>
+        <img src={require('./images/error.png')} style={{height:348}}/>
+      </div>
+      <div>
+      <span style={{fontWeight:'bold', fontSize:48}}>Oops! No such page exists.</span><br/>
+      <span style={{fontWeight:'300', fontSize:24}}>Use this <a  >link</a> to go back to the home page</span>
+      </div>
+      </div>
+    </div>
+  }
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <Home />, 
+      errorElement: <ErrorComp/>,
       children: [
         {
           index:true,
@@ -28,7 +42,19 @@ export default function App() {
         {
           path:"connectors",
           element: <Connectors/>
-        } 
+        },
+        {
+          path:"alerts",
+          element: <Logs/>
+        } ,
+        {
+          path:"playbooks",
+          element: <Playbooks/>
+        } ,
+        {
+          path:"profile",
+          element: <Profile/>
+        }
       ],
     },
   ]);
@@ -36,6 +62,7 @@ export default function App() {
     {
       path: "/",
       element: <AuthPage />, 
+      errorElement: <ErrorComp/>,
     },
   ]);
   console.log(jwt)

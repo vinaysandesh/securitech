@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import './Logout.css'; // External CSS file for styles
-import { useDispatch } from 'react-redux';
-import { removeToken } from '../redux/reducer';
-import { useNavigate } from "react-router-dom";
+import './comp_styles.css'; // External CSS file for styles
+import { useDispatch } from 'react-redux'; 
+import { removeToken } from '../../redux/reducer';
 
-const LogoutPrompt = (props) => {
+const ErrorComponent = (props) => {
   const [showPrompt, setShowPrompt] = useState(false);
   const dispatch = useDispatch()
-  const navigate = useNavigate();
+  
   const handleLogout = () => {
     setShowPrompt(true);
   };
@@ -16,9 +15,7 @@ const LogoutPrompt = (props) => {
     props.handleLogout(false);
     // Your logout logic here
     dispatch(removeToken())
-    
     console.log('User has logged out.');
-    navigate("/", { replace: true });
   };
 
   const cancelLogout = () => {
@@ -44,6 +41,6 @@ const LogoutPrompt = (props) => {
         </div> 
     </div>
   );
-};
+}; 
 
-export default LogoutPrompt;
+export default ErrorComponent;

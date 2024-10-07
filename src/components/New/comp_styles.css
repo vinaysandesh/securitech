@@ -1,0 +1,173 @@
+.side_bar_container{
+   width: '100%';
+   display:flex;
+   flex-direction: row;
+   cursor: pointer;
+}
+.side_bar_container_active{
+    background-color: #892be250;
+}
+.sidebaricon{
+    margin:8px
+}
+.sidebartitle{
+    margin:6px
+}
+
+/* input field styles */
+.inputfield_container{
+    border-radius:40px;
+    box-shadow: 0px 8px 6px rgba(63, 63, 63, 0.237);
+    margin:12px;
+    margin-top:20px;
+    min-width: 300px;
+    margin-bottom:20px; 
+    display: flex;
+    align-items: center;
+    
+    
+}
+.icon_inputfield{
+    position: absolute; 
+    margin-top: 8px;
+    margin-left: 8px;
+    color: rgb(145, 145, 145);
+
+}
+.input_field_style:focus{
+    outline: none;
+  }
+  .input_field_style{ 
+    display: block;  
+    width: 100%;
+    box-sizing: border-box;
+    border-radius:40px; 
+    height: 48px;
+    padding-left: 30px;
+    border:none;
+  }
+  .input_field_style_high{
+    height:250px;
+  }
+  .button_container{
+    border-radius:40px;
+    box-shadow: 4px 4px 6px rgba(110, 110, 110, 0.1);
+    margin:12px;
+    height: 48px; 
+    
+    
+}
+
+.button_style:focus{
+    outline: none;
+  }
+  .button_style{ 
+    display: block;  
+    width: 100%;
+    box-sizing: border-box;border-radius:40px; height: 48px;
+    background-color: #2E3ABF;
+    font-weight: bold;
+    color:white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  /* error component styles */
+  /* Full screen overlay with blur effect */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal container centered */
+  .modal {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Button container */
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  /* Style for accept button */
+  .accept-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Style for cancel button */
+  .cancel-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Ensure buttons are responsive */
+  .accept-button, .cancel-button {
+    min-width: 100px;
+  }
+
+  /* threat count dashboard styles */
+
+  #threats_title{
+    font-weight: bold;
+    font-size: 24px;
+
+  }
+
+  #threats_count{
+    font-weight: bold;
+    font-size: 80px;
+
+  }
+
+  #threats_view_all{
+    font-weight: bold;
+    font-size: 18px;
+
+  }
+
+  /* pagination styles */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .pagination button {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .pagination button.active {
+    background-color: #6c63ff;
+    color: white;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }

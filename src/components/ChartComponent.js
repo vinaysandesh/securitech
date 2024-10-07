@@ -4,52 +4,63 @@ import { get_grouped_logs } from '../const/api';
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { Pie } from 'react-chartjs-2';
+import { PieChart } from 'react-minimal-pie-chart';
 const ChartComponent = ()=>{
-    const data = [{tool:"nmap",count:560},
-        {tool:"snort",count:220},
-        {tool:"plugin",count:30}
-    ]
-    const [chartData, setChartData] = useState({
-        labels: data.map((data) => data.tool), 
-        datasets: [
-          {
-            label: "ALerts from various tools",
-            data: data.map((data) => data.count),
-            backgroundColor: [
-              "rgba(75,192,192,1)",
-              "#ecf0f1",
-              "#50AF95",
-              "#f3ba2f",
-              "#2a71d0"
-            ],
-            borderColor: "black",
-            borderWidth: 2
-          }
-        ]
-      });
-    const [grouped_logs, setGroupLogs] = useState([])
+    // const data = [{tool:"nmap",count:560},
+    //     {tool:"snort",count:220},
+    //     {tool:"plugin",count:30}
+    // ]
+    const [selected, setSelected] = useState(0);
+  const [hovered, setHovered] = useState(undefined);
+    const [data, setGroupLogs] = useState([]) 
+    const colors = ["#160056",'#6B2A9E','#6A2135']
+    const lineWidth = 60;
     useEffect(()=>{
-        axiosApi(get_grouped_logs,"POST",null,(data)=>{
-            console.log("==========Grouped Logs",data.data )
-            setGroupLogs(data.data) 
+
+        axiosApi(get_grouped_logs,"POST",null,(data)=>{ 
+            // setGroupLogs(data.data) 
+            var temp =[]
+            data.data.map((source,index)=>{
+              var obj = { title: source.tool, label:"Value", value: source.count,color:colors[index]  }
+              temp.push(obj)
+            })
+            temp.push({ title: "snort", label:"Value", value: 45,color:colors[2]  })
+            setGroupLogs(temp) 
           }) 
     },[])
-    return <div style={{height:250, width:250, alignItems:"center"}}>
-        {grouped_logs.length>0?grouped_logs[0].tool:"Loading"}
-        <Pie
-        width={60}  // Width in pixels
-        height={60} // Height in pixels
-        data={chartData}
-        options={{
-          maintainAspectRatio: false,
-          plugins: {
-            title: {
-              display: true,
-              text: "Users Gained between 2016-2020"
-            }
-          }
-        }}
-      />
+    return <div  >
+        {data.length>0? 
+<PieChart 
+style={{
+ fontFamily:
+   '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif',
+ fontSize: '8px',
+}}
+data={data}
+radius={30}
+lineWidth={55}
+segmentsStyle={{ transition: 'stroke .3s', cursor: 'pointer' }}
+segmentsShift={(index) => (index === selected ? 6 : 1)}
+animate
+label={({ dataEntry }) => Math.round(dataEntry.percentage) + '%'}
+labelPosition={100 - lineWidth / 2}
+labelStyle={{
+ fill: '#fff',
+ opacity: 0.75,
+ pointerEvents: 'none',
+}}
+onClick={(_, index) => {
+ setSelected(index === selected ? undefined : index);
+}}
+onMouseOver={(_, index) => {
+ setHovered(index);
+}}
+onMouseOut={() => {
+ setHovered(undefined);
+}}
+/>
+ :"Loading"}  
+        
     </div>
 }
 

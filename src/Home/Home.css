@@ -10,9 +10,7 @@
     
   }
   
-   .collapsed {
-    width: 60px; /* Collapsed width */
-  }
+  
   
   .nav-links {
     list-style: none;
@@ -65,10 +63,11 @@
     left: 15px;
   }
   
-  .logo_sidebar { 
-    text-align: left;
-    padding:20px;
-    height:60px;
+  .logo_sidebar {  
+     height: 80px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
   }
 .logo_sidebar h2 {
@@ -95,7 +94,7 @@
   }
   
   .nav-link.active {
-    background-color: #16a085; /* Active link color */
+    background-color: #34495e; /* Active link color */
   }
   .hidden{
      width:60px;
@@ -116,8 +115,19 @@
 
   .logout_sidebar{   
     display:flex; 
-    height:80px;
-    align-items: center;
-    justify-content: center;
+    height:80px;  
    
+  }
+
+
+
+  .sidebar_container{
+    background: linear-gradient(45deg, #6B2A9E, #160056);
+    width: 300px; /* Expanded width */ 
+    height: 100vh;  
+    justify-content: space-between;
+    transition: width 1s;
+  }
+  .collapsed {
+    width: 60px; /* Collapsed width */
   }

@@ -94,3 +94,32 @@
   display: flex;
   justify-content: center;
 }
+/* New css */
+.main_container{
+  display: flex;
+  height: 100vh;
+}
+#auth_left{
+  flex:2;
+  width:100%;
+  display: flex;
+  background-color: red;
+  /* background-image: url("./../../public/images/login_bg.png"); */
+  background:linear-gradient(0deg, #17005795, #69299C95), url("./../images/bg_logo.png");
+  justify-content: center;
+  align-items: center;
+}
+#auth_right{
+  flex:1; 
+}
+#icon_logo{
+  margin:12px;
+ }
+ #text_logo{
+   margin:12px;
+ }
+ .logo_container{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+ }

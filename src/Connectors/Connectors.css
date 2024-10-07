@@ -50,6 +50,8 @@
   
   .tool-card {
     display: flex;
+    
+    background-color: white;
     flex-direction: row;
     align-items: center;
     border: 1px solid #eaeaea;
