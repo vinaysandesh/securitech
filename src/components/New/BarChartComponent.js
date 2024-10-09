@@ -20,8 +20,8 @@ const BarChartComponent = ()=>{
             var temp =[]
             
             temp.push(data.data[0])
-            temp.push({tool:"snort",count:300})
-            temp.push({tool:"plugin",count:24})
+            // temp.push({tool:"snort",count:300})
+            // temp.push({tool:"plugin",count:24})
             console.log(data.data)
             setData(temp) 
           }) 
