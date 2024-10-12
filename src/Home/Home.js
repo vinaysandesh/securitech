@@ -80,10 +80,10 @@ useEffect(()=>{
           <NavLink to="/connectors" className={`nav-link ${isCollapsed&&"hidden"}`}>
           <SidebarItem icon={<FaPlug color="#28A745"/>} title="Connectors" collapsed={isCollapsed}/> 
           </NavLink>
-          <NavLink to="/playbooks" className={`nav-link ${isCollapsed&&"hidden"}`}>
+          {/* <NavLink to="/playbooks" className={`nav-link ${isCollapsed&&"hidden"}`}>
           <SidebarItem icon={<FaLaptopCode  color="#CE65FF"/>} title="Playbooks" collapsed={isCollapsed}/> 
             
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/profile" className={`nav-link ${isCollapsed&&"hidden"}`}>
           <SidebarItem icon={<FaUser color="20C997"/>} title="Profile" collapsed={isCollapsed}/> 
             

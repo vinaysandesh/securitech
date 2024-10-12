@@ -47,10 +47,10 @@ export default function App() {
           path:"alerts",
           element: <Logs/>
         } ,
-        {
-          path:"playbooks",
-          element: <Playbooks/>
-        } ,
+        // {
+        //   path:"playbooks",
+        //   element: <Playbooks/>
+        // } ,
         {
           path:"profile",
           element: <Profile/>

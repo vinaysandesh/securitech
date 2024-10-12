@@ -5,7 +5,7 @@ import nmapLogo from '../images/nmap.jpg'
 import snortLogo from '../images/snort.jpg'
 import axiosApi from "../utility/axios";
 import { run_nmap } from "../const/api";
-import { ColorRing } from "react-loader-spinner";
+import { ColorRing, ProgressBar } from "react-loader-spinner";
 const Connectors = () =>{
   const [name, setName ] = useState("Vinay Sounderraj")
   const [target, setTarget ] = useState(null)
@@ -38,8 +38,8 @@ const Connectors = () =>{
         <div className="desc_connectors">
         <h2>NM<span>A</span>P</h2>
         <p>Nmap is a tool to perform network vulnerability scans. To get started just add the host you want to scan and hit scan</p>
-        <input type="text" placeholder="Enter host..." onChange={e => setTarget(e.target.value)}/>
-        {loader?(<ColorRing
+        <input type="text" placeholder="Enter host..." onChange={e => setTarget(e.target.value)} required/>
+        {loader?(<ProgressBar
   visible={true}
   color={"#160056"}
   height="48"
