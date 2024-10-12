@@ -75,10 +75,10 @@ useEffect(()=>{
           <SidebarItem icon={<FaHome color='#007BFF'/>} title="Dashboard" collapsed={isCollapsed}/> 
           </NavLink>
           <NavLink to="/alerts" className={`nav-link ${isCollapsed&&"hidden"}`}>
-          <SidebarItem icon={<FaPlug color="#28A745"/> } title="Alerts" collapsed={isCollapsed}/> 
+          <SidebarItem icon={<FaExclamationTriangle color="#FD7E14"/> } title="Alerts" collapsed={isCollapsed}/> 
           </NavLink>
           <NavLink to="/connectors" className={`nav-link ${isCollapsed&&"hidden"}`}>
-          <SidebarItem icon={<FaExclamationTriangle color="#FD7E14"/>} title="Connectors" collapsed={isCollapsed}/> 
+          <SidebarItem icon={<FaPlug color="#28A745"/>} title="Connectors" collapsed={isCollapsed}/> 
           </NavLink>
           <NavLink to="/playbooks" className={`nav-link ${isCollapsed&&"hidden"}`}>
           <SidebarItem icon={<FaLaptopCode  color="#CE65FF"/>} title="Playbooks" collapsed={isCollapsed}/> 

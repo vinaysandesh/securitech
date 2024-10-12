@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const getPageNumbers = () => {
@@ -6,41 +6,36 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
     const maxPagesToShow = 5; // Number of page buttons to show (2 on either side + current)
     const halfWindow = Math.floor(maxPagesToShow / 2);
 
-    // If totalPages is less than the max pages to show, display all
-    if (totalPages <= maxPagesToShow) {
-      pages = [...Array(totalPages)].map((_, i) => i + 1);
-    } else {
-      // Calculate start and end page
-      let startPage = Math.max(1, currentPage - halfWindow);
-      let endPage = Math.min(totalPages, currentPage + halfWindow);
+    // Adjust startPage and endPage dynamically
+    let startPage = Math.max(1, currentPage - halfWindow);
+    let endPage = Math.min(totalPages, currentPage + halfWindow);
 
-      // Adjust if the start or end goes beyond the limits
-      if (currentPage <= halfWindow) {
-        endPage = maxPagesToShow;
-      } else if (currentPage + halfWindow >= totalPages) {
-        startPage = totalPages - maxPagesToShow + 1;
-      }
+    // Ensure the maxPagesToShow is maintained by adjusting startPage and endPage
+    if (currentPage <= halfWindow) {
+      endPage = Math.min(maxPagesToShow, totalPages);
+    } else if (currentPage + halfWindow >= totalPages) {
+      startPage = Math.max(1, totalPages - maxPagesToShow + 1);
+    }
 
-      // Add first page and ellipsis
-      if (startPage > 1) {
-        pages.push(1);
-        if (startPage > 2) {
-          pages.push('...');
-        }
+    // Add first page and ellipsis
+    if (startPage > 1) {
+      pages.push(1);
+      if (startPage > 2) {
+        pages.push('...');
       }
+    }
 
-      // Add the range of pages
-      for (let i = startPage; i <= endPage; i++) {
-        pages.push(i);
-      }
+    // Add pages in the range of startPage to endPage
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
 
-      // Add ellipsis and last page
-      if (endPage < totalPages) {
-        if (endPage < totalPages - 1) {
-          pages.push('...');
-        }
-        pages.push(totalPages);
+    // Add ellipsis and last page
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        pages.push('...');
       }
+      pages.push(totalPages);
     }
 
     return pages;

@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axiosApi from '../../utility/axios';
 import { get_logs } from '../../const/api';
-
+import ManualAlert from './ManualAlert';
+import './comp_styles.css'
 const AlertsTable = (props) =>{
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(true)
+    const [showDeailedView,setShowDetailedView] = useState(false)
+    const [sourceData, setSourceData ] = useState([])
+    const [isHovered, setIsHovered] = useState(false);
     console.log("props.offset",props.offset)
     useEffect(()=>{
-        axiosApi(get_logs,"POST",{offset:props.offset?props.offset:0},(data)=>{
-            console.log(data)
+        axiosApi(get_logs,"POST",{offset:props.offset?props.offset-1:0},(data)=>{ 
             setData(data.data)
             setLoading(false)
           })
-    },[props.offset])
+    },[props.offset,props.refetch])
     const tableStyle = {
         width: '100%',
         borderCollapse: 'collapse',
@@ -39,9 +42,10 @@ const AlertsTable = (props) =>{
         borderBottom: '1px solid #ddd',
       };
     
-      const tbodyRowStyle = {
-        backgroundColor: '#f9f9f9',
-        height:"120px"
+      const tbodyRowStyle = { 
+        height:"120px",
+        cursor: 'pointer', // Show pointer cursor on hover
+        transition: 'background-color 0.2s ease',
       };
     
       const alertIconStyle = {
@@ -55,6 +59,7 @@ const AlertsTable = (props) =>{
       };
       const trStyle = {
         height:"50px",
+       
     
       }
       const RenderPriority = (props)=>{
@@ -63,32 +68,42 @@ const AlertsTable = (props) =>{
           color:"white",
           fontWeight:'bold'
         }
-        if(props.val == "High"){
+        if(props.val == "Critical"){
           style = { ...style,
-            backgroundColor:'#FF0000',
+            backgroundColor:'#a94442',
+    
+          };
+        }else if(props.val == "High"){
+          style = { ...style,
+            backgroundColor:'#d9534f',
     
           };
         }else if(props.val=="Medium"){
        style = { ...style,
-            backgroundColor:'#FFFF00',
+            backgroundColor:'#f0ad4e',
             
           };
         }else if(props.val=="Low"){
           style = { ...style,
-            backgroundColor:'#008000',
+            backgroundColor:'#5cb85c',
             
           };
         }else if(props.val=="Info"){
           style = { ...style,
-            backgroundColor:'#808080',
+            backgroundColor:'#5bc0de',
             
           };
         }
         return <td style={{...tdStyle}}><span style={style}>{props.val}</span></td>
     
       } 
+    const openDetailedView=(source)=>{
+setSourceData(source)
+setShowDetailedView(!showDeailedView)
+    }
     return (
         <div style={{display:'flex', flex: 1, backgroundColor:'white'  ,overflow:'hidden',overflowY: "auto",height:340,scrollbarWidth: "none",...props.styles}}>
+            {sourceData&&(<ManualAlert source={sourceData} isOpen={showDeailedView} onClose={openDetailedView }/>)} 
             {data.length>0?(
                 <table style={tableStyle}>
                 <thead>
@@ -106,9 +121,11 @@ const AlertsTable = (props) =>{
                 <tbody>
                   {loading ?(<span>LOADING CONTENT</span>):(
                     <>
-                    {data.map((source, index)=>{
-                      return <tr style={tbodyRowStyle}>
-                      <td style={tdStyle}>{ ( props.offset==1?index+1:(props.offset-1)*10+index+1  ) }</td>
+                    {data.map((source, index)=>{ 
+                      return <tr  onClick={()=>{openDetailedView(source) }} style={tbodyRowStyle}
+                      className='rowHoverAlertTable'
+                      >
+                      <td style={tdStyle}>{ ( props.dash?(index+1):(props.offset==1?index+1:(props.offset-1)*10+index+1  )) }</td>
                       <td style={tdStyle}><a href={source.issue_url} target="_blank">{source.issue_name}</a></td>
                       <td style={tdStyle}>{source.issue_description}</td>
                       <td style={tdStyle}>{source.assigned_to}</td>

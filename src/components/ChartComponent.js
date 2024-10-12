@@ -13,7 +13,20 @@ const ChartComponent = ()=>{
     const [selected, setSelected] = useState(0);
   const [hovered, setHovered] = useState(undefined);
     const [data, setGroupLogs] = useState([]) 
-    const colors = ["#160056",'#6B2A9E','#6A2135']
+    const colors = [
+      "#160056",  // Deep Purple
+      "#6B2A9E",  // Dark Violet
+      "#6A2135",  // Dark Red
+      "#FF6F61",  // Coral
+      "#F7B32B",  // Mustard Yellow
+      "#008F7A",  // Teal Green
+      "#FFDDC1",  // Peach
+      "#2A9D8F",  // Emerald Green
+      "#E76F51",  // Salmon
+      "#264653",  // Dark Cyan
+      "#F4A261",  // Orange
+      "#E9C46A",  // Gold
+    ];
     const lineWidth = 60;
     useEffect(()=>{
 
@@ -24,7 +37,7 @@ const ChartComponent = ()=>{
               var obj = { title: source.tool, label:"Value", value: source.count,color:colors[index]  }
               temp.push(obj)
             })
-            temp.push({ title: "snort", label:"Value", value: 45,color:colors[2]  })
+            // temp.push({ title: "snort", label:"Value", value: 45,color:colors[2]  })
             setGroupLogs(temp) 
           }) 
     },[])

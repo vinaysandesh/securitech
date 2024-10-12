@@ -19,7 +19,9 @@ const BarChartComponent = ()=>{
             // setGroupLogs(data.data) 
             var temp =[]
             
-            temp.push(data.data[0])
+           data.data.map((source)=>{
+            temp.push(source)
+           })
             // temp.push({tool:"snort",count:300})
             // temp.push({tool:"plugin",count:24})
             console.log(data.data)
