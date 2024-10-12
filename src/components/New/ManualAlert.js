@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./comp_styles.css"
 import axiosApi from '../../utility/axios';
-import { add_manual_alerts } from '../../const/api';
+import { add_manual_alerts, getAllUsers } from '../../const/api';
 import getCurrentDate from '../../utility/currentdatetime';
 import { Audio, ColorRing, RotatingLines } from "react-loader-spinner";
 const ManualAlert = ({ isOpen, onClose, onSubmit, source}) => {
@@ -37,6 +37,7 @@ const ManualAlert = ({ isOpen, onClose, onSubmit, source}) => {
   const [scanDate, setScanDate] = useState(getCurrentDate( ));
   const [tool, setTool] = useState('Manual');
   const [loader, setLoader] = useState(false)
+  const [myLogs, setMyLogs ] = useState(false)
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -126,7 +127,33 @@ const ManualAlert = ({ isOpen, onClose, onSubmit, source}) => {
       setAssignedTo(source.assigned_to)
       setStatus(source.status)
     } 
+    
   },[source] )
+  const RenderAllUsers = ()=>{
+    const [users, setUsers ]= useState([])
+    useEffect(()=>{
+    axiosApi(getAllUsers, "GET", "",(data)=>{
+      console.log("data",data.data)
+      setUsers(data.data.users)
+     },(err)=>{
+       console.log(err)
+     })
+   },[])
+
+     return(<div>
+          <select id="userSelect"
+          
+          className="custom-form-input"
+    style={{height:48}}>
+        <option value="">Select a user</option>
+        {users.length>0&&users.map((user) => (
+          <option key={user.id} value={user.id}>
+            {user.username}
+          </option>
+        ))}
+      </select>
+     </div>)
+  }
   return (
     <>
     {
@@ -205,7 +232,7 @@ const ManualAlert = ({ isOpen, onClose, onSubmit, source}) => {
   
                {source?(
                 <div style={{marginLeft:20}}>
-                   URL:<a href={issueUrl?issueUrl:""} style={{...divStyleInputFields}}>
+                   URL:<a target="_blank" href={issueUrl?issueUrl:""} style={{...divStyleInputFields}}>
                  {/* <input
                    type="url"
                    name="issue_url"
@@ -233,7 +260,7 @@ const ManualAlert = ({ isOpen, onClose, onSubmit, source}) => {
              </div>}
   
                 <div style={divStyleInputFields}>
-                  <input
+                  {/* <input
                     type="text"
                     name="assigned_to"
                     value={assignedTo}
@@ -242,7 +269,8 @@ const ManualAlert = ({ isOpen, onClose, onSubmit, source}) => {
                     className="custom-form-input"
                     placeholder='Assign alert to user'
                     disabled={source}
-                  />
+                  /> */}
+                  <RenderAllUsers/>
                   <input
                     type="text"
                     name="status"

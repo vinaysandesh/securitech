@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axiosApi from '../../utility/axios';
-import { get_logs } from '../../const/api';
+import { get_logs, get_user_details } from '../../const/api';
 import ManualAlert from './ManualAlert';
 import './comp_styles.css'
 const AlertsTable = (props) =>{
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(true)
     const [showDeailedView,setShowDetailedView] = useState(false)
-    const [sourceData, setSourceData ] = useState([])
-    const [isHovered, setIsHovered] = useState(false);
+    const [sourceData, setSourceData ] = useState([]) 
     console.log("props.offset",props.offset)
     useEffect(()=>{
-        axiosApi(get_logs,"POST",{offset:props.offset?props.offset-1:0},(data)=>{ 
+        axiosApi(get_logs,"POST",{offset:props.offset?props.offset-1:0, assigned_to:props.myLogs?props.user:null},(data)=>{ 
             setData(data.data)
             setLoading(false)
           })
-    },[props.offset,props.refetch])
+         
+    },[props.offset,props.refetch,props.myLogs])
     const tableStyle = {
         width: '100%',
         borderCollapse: 'collapse',

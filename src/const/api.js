@@ -7,3 +7,4 @@ export const get_grouped_logs = base_url+"/api/connector/get-grouped_tools"
 
 export const run_nmap = base_url+"/api/connector/nmap-scan"
 export const add_manual_alerts = base_url+"/api/manual-alerts/add-manual-alert"
+export const getAllUsers = base_url+"/api/users/fetch-users"
