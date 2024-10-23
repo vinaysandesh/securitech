@@ -142,12 +142,14 @@ const ManualAlert = ({ isOpen, onClose, onSubmit, source}) => {
 
      return(<div>
           <select id="userSelect"
-          
-          className="custom-form-input"
+          onChange={(e) => {
+            console.log(e.target)
+            setAssignedTo(e.target.value)}}
+          className="custom-form-input" 
     style={{height:48}}>
         <option value="">Select a user</option>
         {users.length>0&&users.map((user) => (
-          <option key={user.id} value={user.id}>
+          <option  key={user.id} value={user.username}>
             {user.username}
           </option>
         ))}
